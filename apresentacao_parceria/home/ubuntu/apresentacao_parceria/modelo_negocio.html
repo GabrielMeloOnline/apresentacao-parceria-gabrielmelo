@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background-color: #1d1d1b;
+        color: #f7f7f6;
+        position: relative;
+      }
+      .accent-color {
+        color: #d2d323;
+      }
+      .secondary-text {
+        color: #7e7e7c;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #d2d323;
+      }
+      .logo-small {
+        width: 60px;
+        height: auto;
+      }
+      .page-title {
+        font-size: 36px;
+        font-weight: 600;
+      }
+      .content-container {
+        display: flex;
+        margin-top: 30px;
+        gap: 40px;
+      }
+      .left-content {
+        flex: 1;
+      }
+      .right-content {
+        width: 500px;
+      }
+      .model-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .flow-chart-container {
+        width: 100%;
+        height: 250px;
+        margin-top: 20px;
+      }
+      .model-step {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+      .step-number {
+        background-color: #d2d323;
+        color: #1d1d1b;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+      .step-content {
+        flex: 1;
+      }
+      .step-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .step-description {
+        font-size: 16px;
+        color: #7e7e7c;
+      }
+      .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <div class="header">
+        <h1 class="page-title">Modelo de Negócio</h1>
+        <img src="/home/ubuntu/apresentacao_parceria/imagens/logo_gabriel.jpg" alt="Logo Gabriel Melo" class="logo-small">
+      </div>
+      
+      <div class="content-container">
+        <div class="left-content">
+          <div class="model-step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Sistema de Indicação e Rastreamento</h3>
+              <p class="step-description">Cada nutricionista recebe um link de afiliado ou código de desconto exclusivo para indicar os programas aos seus pacientes, garantindo o rastreamento preciso da origem das vendas.</p>
+            </div>
+          </div>
+          
+          <div class="model-step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Pagamento Mensal de Comissões</h3>
+              <p class="step-description">Comissão de 10% sobre o valor de cada venda efetivada, com pagamentos realizados mensalmente mediante relatório detalhado das vendas geradas.</p>
+            </div>
+          </div>
+          
+          <div class="model-step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Acesso aos Protocolos</h3>
+              <p class="step-description">Após a formalização da parceria, liberação de acesso gratuito aos programas SF-60 e SF-60 PLUS para consumo próprio, permitindo conhecimento aprofundado da metodologia.</p>
+            </div>
+          </div>
+          
+          <div class="model-step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Colaboração em Programas Nutricionais</h3>
+              <p class="step-description">Oportunidade de colaborar na criação ou adaptação de protocolos nutricionais para os programas, com remuneração adicional negociada individualmente.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="right-content">
+          <img src="/home/ubuntu/apresentacao_parceria/imagens/parceria_sucesso.jpg" alt="Modelo de Negócio" class="model-image">
+          
+          <div class="flow-chart-container">
+            <canvas id="flowChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p class="secondary-text">Gabriel Melo - Personal e Online Coaching</p>
+        <p class="secondary-text">7/9</p>
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('flowChart').getContext('2d');
+        
+        const flowChart = new Chart(ctx, {
+          type: 'horizontalBar',
+          data: {
+            labels: ['Indicação', 'Venda', 'Comissão', 'Renovação'],
+            datasets: [{
+              axis: 'y',
+              label: 'Fluxo de Parceria',
+              data: [100, 30, 30, 25],
+              backgroundColor: [
+                '#7e7e7c',
+                '#d2d323',
+                '#d2d323',
+                '#d2d323'
+              ],
+              borderColor: [
+                '#7e7e7c',
+                '#d2d323',
+                '#d2d323',
+                '#d2d323'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              x: {
+                beginAtZero: true,
+                ticks: {
+                  color: '#f7f7f6'
+                },
+                grid: {
+                  color: 'rgba(126, 126, 124, 0.2)'
+                }
+              },
+              y: {
+                ticks: {
+                  color: '#f7f7f6'
+                },
+                grid: {
+                  display: false
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Ciclo de Conversão (de 100 indicações)',
+                color: '#f7f7f6',
+                font: {
+                  size: 16
+                }
+              },
+              tooltip: {
+                callbacks: {
+                  label: function(context) {
+                    const labels = [
+                      '100 pacientes indicados',
+                      '30 conversões em vendas (30%)',
+                      'R$3.000 em comissões (média)',
+                      '25 renovações (83% de retenção)'
+                    ];
+                    return labels[context.dataIndex];
+                  }
+                }
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+

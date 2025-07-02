@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background-color: #1d1d1b;
+        color: #f7f7f6;
+        position: relative;
+      }
+      .accent-color {
+        color: #d2d323;
+      }
+      .secondary-text {
+        color: #7e7e7c;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #d2d323;
+      }
+      .logo-small {
+        width: 60px;
+        height: auto;
+      }
+      .page-title {
+        font-size: 36px;
+        font-weight: 600;
+      }
+      .content-container {
+        display: flex;
+        margin-top: 30px;
+        gap: 40px;
+      }
+      .left-content {
+        flex: 1;
+      }
+      .right-content {
+        width: 500px;
+      }
+      .steps-image {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .timeline-container {
+        width: 100%;
+        height: 250px;
+        margin-top: 20px;
+        position: relative;
+      }
+      .next-step {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+      .step-icon {
+        background-color: #d2d323;
+        color: #1d1d1b;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+      .step-content {
+        flex: 1;
+      }
+      .step-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .step-description {
+        font-size: 16px;
+        color: #7e7e7c;
+      }
+      .timeline {
+        position: relative;
+        width: 100%;
+        height: 4px;
+        background-color: #7e7e7c;
+        margin: 30px 0;
+      }
+      .timeline-point {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: #d2d323;
+        border-radius: 50%;
+        top: -6px;
+        transform: translateX(-50%);
+      }
+      .timeline-label {
+        position: absolute;
+        top: 20px;
+        transform: translateX(-50%);
+        text-align: center;
+        font-size: 14px;
+        color: #f7f7f6;
+        width: 100px;
+      }
+      .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <div class="header">
+        <h1 class="page-title">Próximos Passos</h1>
+        <img src="/home/ubuntu/apresentacao_parceria/imagens/logo_gabriel.jpg" alt="Logo Gabriel Melo" class="logo-small">
+      </div>
+      
+      <div class="content-container">
+        <div class="left-content">
+          <div class="next-step">
+            <div class="step-icon">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Como se Tornar Parceiro(a)</h3>
+              <p class="step-description">Preencha o formulário de interesse que será enviado após esta apresentação. Faremos uma breve entrevista para alinhar expectativas e formalizar a parceria com um termo simples e transparente.</p>
+            </div>
+          </div>
+          
+          <div class="next-step">
+            <div class="step-icon">
+              <i class="fas fa-tools"></i>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Materiais de Apoio Disponíveis</h3>
+              <p class="step-description">Você receberá um kit completo com textos, imagens e vídeos curtos para divulgação, além de um guia detalhado sobre os programas e seus diferenciais para apresentar aos pacientes.</p>
+            </div>
+          </div>
+          
+          <div class="next-step">
+            <div class="step-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Canais de Comunicação</h3>
+              <p class="step-description">Acesso a um grupo exclusivo de WhatsApp para parceiros, onde você poderá tirar dúvidas, receber atualizações sobre os programas e compartilhar experiências com outros profissionais.</p>
+            </div>
+          </div>
+          
+          <div class="next-step">
+            <div class="step-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <div class="step-content">
+              <h3 class="step-title">Início Imediato</h3>
+              <p class="step-description">Após a formalização, você já pode começar a indicar os programas e receber suas comissões. O primeiro pagamento será realizado 30 dias após a primeira venda efetivada.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="right-content">
+          <img src="/home/ubuntu/apresentacao_parceria/imagens/crescimento_saude.jpg" alt="Próximos Passos" class="steps-image">
+          
+          <div class="timeline-container">
+            <h3 class="text-center mb-4 accent-color">Cronograma de Implementação</h3>
+            
+            <div class="timeline">
+              <div class="timeline-point" style="left: 0%"></div>
+              <div class="timeline-label" style="left: 0%">Hoje<br>Apresentação</div>
+              
+              <div class="timeline-point" style="left: 25%"></div>
+              <div class="timeline-label" style="left: 25%">Dia 7<br>Formalização</div>
+              
+              <div class="timeline-point" style="left: 50%"></div>
+              <div class="timeline-label" style="left: 50%">Dia 10<br>Treinamento</div>
+              
+              <div class="timeline-point" style="left: 75%"></div>
+              <div class="timeline-label" style="left: 75%">Dia 15<br>Início das<br>Indicações</div>
+              
+              <div class="timeline-point" style="left: 100%"></div>
+              <div class="timeline-label" style="left: 100%">Dia 45<br>Primeiro<br>Pagamento</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p class="secondary-text">Gabriel Melo - Personal e Online Coaching</p>
+        <p class="secondary-text">8/9</p>
+      </div>
+    </div>
+  </body>
+</html>
+
