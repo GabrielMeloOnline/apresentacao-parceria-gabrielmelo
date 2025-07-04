@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .slide-container {
+        width: 1280px;
+        min-height: 720px;
+        background-color: #1d1d1b;
+        color: #f7f7f6;
+        position: relative;
+      }
+      .accent-color {
+        color: #d2d323;
+      }
+      .secondary-text {
+        color: #7e7e7c;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #d2d323;
+      }
+      .logo-small {
+        width: 60px;
+        height: auto;
+      }
+      .page-title {
+        font-size: 36px;
+        font-weight: 600;
+      }
+      .content-container {
+        display: flex;
+        margin-top: 30px;
+        gap: 40px;
+      }
+      .left-content {
+        flex: 1;
+      }
+      .right-content {
+        width: 500px;
+      }
+      .partnership-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      .synergy-chart-container {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+      }
+      .reason {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+      .reason-icon {
+        color: #d2d323;
+        font-size: 24px;
+        margin-right: 15px;
+        margin-top: 2px;
+      }
+      .reason-content {
+        flex: 1;
+      }
+      .reason-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      .reason-description {
+        font-size: 16px;
+        color: #7e7e7c;
+      }
+      .footer {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container p-16">
+      <div class="header">
+        <h1 class="page-title">Por que Parceria com Nutricionistas?</h1>
+        <img src="/home/ubuntu/apresentacao_parceria/imagens/logo_gabriel.jpg" alt="Logo Gabriel Melo" class="logo-small">
+      </div>
+      
+      <div class="content-container">
+        <div class="left-content">
+          <div class="reason">
+            <i class="fas fa-puzzle-piece reason-icon"></i>
+            <div class="reason-content">
+              <h3 class="reason-title">Complementaridade de Serviços</h3>
+              <p class="reason-description">Nutrição e treinamento físico são pilares complementares para resultados efetivos. Juntos, potencializamos os resultados dos clientes.</p>
+            </div>
+          </div>
+          
+          <div class="reason">
+            <i class="fas fa-chart-line reason-icon"></i>
+            <div class="reason-content">
+              <h3 class="reason-title">Abordagem Integrada = Resultados Superiores</h3>
+              <p class="reason-description">Quando o acompanhamento nutricional é combinado com treinos eficientes, os resultados são até 3x mais rápidos e duradouros.</p>
+            </div>
+          </div>
+          
+          <div class="reason">
+            <i class="fas fa-users reason-icon"></i>
+            <div class="reason-content">
+              <h3 class="reason-title">Público-Alvo Comum</h3>
+              <p class="reason-description">Atendemos o mesmo perfil de cliente: mulheres acima de 30 anos que buscam transformação física e qualidade de vida.</p>
+            </div>
+          </div>
+          
+          <div class="reason">
+            <i class="fas fa-award reason-icon"></i>
+            <div class="reason-content">
+              <h3 class="reason-title">Credibilidade Mútua</h3>
+              <p class="reason-description">A associação entre profissionais qualificados fortalece a confiança dos clientes e aumenta a autoridade de ambos no mercado.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="right-content">
+          <img src="/home/ubuntu/apresentacao_parceria/imagens/equipe_saude.jpg" alt="Parceria Nutrição e Fitness" class="partnership-image">
+          
+          <div class="synergy-chart-container">
+            <canvas id="synergyChart"></canvas>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer">
+        <p class="secondary-text">Gabriel Melo - Personal e Online Coaching</p>
+        <p class="secondary-text">5/9</p>
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('synergyChart').getContext('2d');
+        
+        const synergyChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['Apenas Dieta', 'Apenas Treino', 'Dieta + Treino'],
+            datasets: [{
+              label: 'Efetividade na Perda de Peso (%)',
+              data: [40, 30, 85],
+              backgroundColor: [
+                '#7e7e7c',
+                '#7e7e7c',
+                '#d2d323'
+              ],
+              borderColor: [
+                '#7e7e7c',
+                '#7e7e7c',
+                '#d2d323'
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              y: {
+                beginAtZero: true,
+                max: 100,
+                ticks: {
+                  color: '#f7f7f6'
+                },
+                grid: {
+                  color: 'rgba(126, 126, 124, 0.2)'
+                }
+              },
+              x: {
+                ticks: {
+                  color: '#f7f7f6'
+                },
+                grid: {
+                  display: false
+                }
+              }
+            },
+            plugins: {
+              legend: {
+                display: false
+              },
+              title: {
+                display: true,
+                text: 'Sinergia entre Nutrição e Treinamento',
+                color: '#f7f7f6',
+                font: {
+                  size: 16
+                }
+              }
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
+
